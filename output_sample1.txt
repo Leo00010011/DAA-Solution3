@@ -1,0 +1,55 @@
+
+
+
+CNF = (~A | B | E) & (A | ~B) & (A | ~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C)
+Units = []
+CNF after unit propogation = (~A | B | E) & (A | ~B) & (A | ~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C)
+
+CNF = (~A | B | E) & (A | ~B) & (A | ~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (A)
+Units = ['A']
+CNF after unit propogation = (B | E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C)
+
+CNF = (B | E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (B)
+Units = ['B']
+CNF after unit propogation = (~E | D) & (~C | ~F) & (F) & (C)
+
+CNF = (~E | D) & (~C | ~F) & (F) & (C) & (E)
+Units = ['F', 'C', 'E']
+CNF after unit propogation = (D) & 
+
+CNF = (~E | D) & (~C | ~F) & (F) & (C) & (~E)
+Units = ['F', 'C', '!E']
+CNF after unit propogation = ()
+
+CNF = (B | E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (~B)
+Units = ['!B']
+CNF after unit propogation = (E) & (~E | D) & (~E)
+
+CNF = (E) & (~E | D) & (~E) & (E)
+Units = ['E', '!E']
+CNF after unit propogation = (D) & 
+
+CNF = (E) & (~E | D) & (~E) & (~E)
+Units = ['E', '!E']
+CNF after unit propogation = (D) & 
+
+CNF = (~A | B | E) & (A | ~B) & (A | ~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (~A)
+Units = ['!A']
+CNF after unit propogation = (~B) & (~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C)
+
+CNF = (~B) & (~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (B)
+Units = ['!B', '!E', 'B']
+CNF after unit propogation = ()
+
+CNF = (~B) & (~E) & (~E | D) & (~C | ~F | ~B) & (~E | B) & (~B | F) & (~B | C) & (~B)
+Units = ['!B', '!E']
+CNF after unit propogation = ()
+
+Number of iterations = 11
+Unit Propogations = 19
+Result: SATISFIABLE
+Solution:
+		A = False
+		B = False
+		E = False
+
