@@ -1,11 +1,11 @@
 #import sys
 from copy import deepcopy
 from classes import Formula
+from process_data import read_file, write_file
 
 assign_true = []
 assign_false = []
 n_props, n_iterations = 0, 0
-
 
 def print_cnf(cnf):
     s = ''
@@ -21,11 +21,6 @@ def print_cnf(cnf):
         s = '()'
     print(s)
     return s
-
-def write_file(filename, text):
-    text = f'{text}\n'
-    with open(filename, 'a') as file:
-        file.write(text)
 
 def get_units_clauses(cnf):
     units = []
@@ -117,7 +112,6 @@ def solve(cnf, literals, output_file):
             assign_false.remove(i)
         return False
 
-
 def dpll(cnf, literals, output_file):
     global assign_true, assign_false, n_props, n_iterations
     
@@ -141,9 +135,7 @@ def dpll(cnf, literals, output_file):
 
 if __name__=='__main__':
     filename = "sample1.txt"
-    input = open(filename, 'r').read() #open(sys.argv[1], 'r').read()
-    literals = [i for i in list(set(input)) if i.isalpha()]
-    cnf = input.splitlines()
+    cnf, literals = read_file(filename)
     output_file = f"output_{filename}"
     
     dpll(cnf,literals, output_file)

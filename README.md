@@ -19,16 +19,35 @@ La reducción consiste en negar toda la expresión y como nuestro problema puede
 
 ## Algoritmo DPLL
 
-El algoritmo DPLL. DPLL es un algoritmo eficiente y completo para la satisfacibilidad booleana, que busca determinar si existe una asignación de valores a las variables en una fórmula proposicional que la haga verdadera.
+DPLL es un algoritmo eficiente y completo para la satisfacibilidad booleana, que busca determinar si existe una asignaci&oacute;n de valores a las variables en una f&oacute;rmula proposicional que la haga verdadera.
 
-Este utiliza una estrategia de búsqueda en espacio de estados para explorar sistemáticamente las posibles asignaciones de valores a las variables. Basado en la idea de la resolución por unit propagation (clausulas de 1 solo literal) y la eliminación de literales puros(literales que solo aparecen de 1 sola forma en toda la expresion), DPLL es capaz de reducir el espacio de búsqueda de manera significativa, evitando explorar ramas innecesarias.
+Este utiliza una estrategia de b&uacute;squeda en espacio de estados para explorar sistem&aacute;ticamente las posibles asignaciones de valores a las variables. Basado en la idea de la resoluci&oacute;n por unit propagation (clausulas de 1 solo literal) y la eliminaci&oacute;n de literales puros(literales que solo aparecen de 1 sola forma en toda la expresi&oacute;n), DPLL es capaz de reducir el espacio de b&uacute;squeda de manera significativa, evitando explorar ramas innecesarias.
 
-En nuestra implementacion del algoritmo, este recibe una expresion booleana que esta en CNF. Para esto se crea un archivo .txt y se escribe la formula en CNF con el siguiente formato:
+En nuestra implementaci&oacute;n del algoritmo, este recibe una expresi&oacute;n booleana que esta en CNF. Para esto se crea un archivo .txt y se escribe la f&oacute;rmula en CNF con el siguiente formato:
 
-- Cada linea del .txt es una clausula, donde los literales estan separados por espacio. No hace falta poner parentesis. Para negar un literal se usa el caracter '!'. Ver ejemplo del archivo sample1.txt y su resultado en output_sample1.txt .
+- Cada l&iacute;nea del .txt es una cl&aacute;usula, donde los literales est&aacute;n separados por espacio. No hace falta poner par&eacute;ntesis. Para negar un literal se usa el caracter '!'. Ver ejemplo del archivo sample1.txt y su resultado en output_sample1.txt .
 
-En el archivo output.txt se guardan los pasos de cada iteracion, como se va reduciendo la CNF. Al final se devuelve si fue SATISFIABLE o UNSATISFIABLE. Para añadir otro archivo .txt con una nueva expresion booleana basta con cambiar en el codigo la variable 'filename' y poner el nombre del archivo con la extension(.txt).
+En el archivo output.txt se guardan los pasos de cada iteraci&oacute;n, como se va reduciendo la CNF. Al final se devuelve si fue SATISFIABLE o UNSATISFIABLE. Para añadir otro archivo .txt con una nueva expresi&oacute;n booleana basta con cambiar en el c&oacute;digo la variable 'filename' y poner el nombre del archivo con la extensi&oacute;n(.txt).
 
-A continuacion le mostramos el pseudocodigo:
+A continuaci&oacute;n le mostramos el pseudoc&oacute;digo:
 
 ![DPLL](/dpll_pseudocode.jpg)
+
+## K-approximati&oacute;n
+
+Una k-aproximaci&oacute;n es un algoritmo para resolver problemas de optimizaci&oacute;n, donde se quiere encontrar una soluci&oacute;n que se acerque al &oacute;ptimo en un factor de aproximaci&oacute;n k, o sea, como m&aacute;ximo k veces peor que nuestra soluci&oacute;n &oacute;ptima.
+
+Para nuestra implementaci&oacute;n del mismo, ofrecemos una 2-aproximaci&oacute;n del problema original. Para determinar si la expresi&oacute;n en CNF es satisfacible o no, comprobamos cu&aacute;ntas cl&aacute;usulas se eval&uacute;an True asignando valor True a todos los literales(caso I); y cuantas clausulas se hacen True dandole valor False a todos los literales(caso II).
+Aquellas cl&aacute;usulas que contengan tanto literales positivos como negativos ser&aacute;n en ambas asignasiciones True. Solo en las cl&aacute;usulas de un solo tipo de literal es que ser&aacute; True en alguna de las 2 asignaciones. Este algoritmo devuelve en cada caso m&aacute;s de la mitad de las cl&aacute;usulas de la CNF.
+
+### Demostraci&oacute;n
+
+Demostremos esta afirmaci&oacute;n por reducci&oacute;n al absurdo.
+Supongamos que en ambos casos (I) y (II), se devuelven menos de la mitad de las cl&aacute;usulas en True.
+Esto quiere decir que exite al menos una cl&aacute;usula que en ambas asignaciones siempre es False. Pero esa cl&aacute;usula solo puede ser de 3 formas:
+
+1- Solo contiene literales positivos => hubiese devuelto True en (I).
+2- Solo contiene literales negativos => hubiese devuelto True en (II).
+3- Contiene ambos literales => hubiese devuelto True en (I) y (II).
+
+Contradicci&oacute;n! Luego, el algoritmo devuelve en cada caso m&aacute;s de la mitad de las cl&aacute;usulas de la CNF.
