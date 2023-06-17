@@ -33,6 +33,10 @@ A continuaci&oacute;n le mostramos el pseudoc&oacute;digo:
 
 ![DPLL](/dpll_pseudocode.jpg)
 
+### Demostraci&oacute;n de correctitud de DPLL
+
+El algoritmo DPLL es un backtrack con podas. En el peor caso chequea todos los literales y su negaci&oacute;n con una complejidad temporal de O(2^n). La poda que aplica es aquellos literales que est&eacute;n en una cl&aacute;usula unaria tienen que tomar valor True necesariamente, para que la f&oacute;rmula sea satisfacible. Luego, todas las dem&aacute;s cl&aacute;usulas donde este presente ese literal se eliminan, porque al ser una disyunci&oacute;n de literales, con al menos uno que sea True es suficiente. De aquellas otras cl&aacute;, se elimina el opuesto del literal, porque al ser False no se completa que la cl&aacute;usula sea verdadera. Esto deriva a que si se llega a una cl&aacute;usula vac&iacute;a es porque todos los literales que conten&iacute;n dieron False y por tanto, con la asignaci&oacute;n actual de literales no se llega a una satisfacer la f&oacute;rmula. Por tanto, por lo antes explicado, las soluciones que descarta la poda no son soluciones factibles.
+
 ## K-approximati&oacute;n
 
 Una k-aproximaci&oacute;n es un algoritmo para resolver problemas de optimizaci&oacute;n, donde se quiere encontrar una soluci&oacute;n que se acerque al &oacute;ptimo en un factor de aproximaci&oacute;n k, o sea, como m&aacute;ximo k veces peor que nuestra soluci&oacute;n &oacute;ptima.
