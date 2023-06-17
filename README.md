@@ -55,3 +55,5 @@ Esto quiere decir que exite al menos una cl&aacute;usula que en ambas asignacion
 3- Contiene ambos literales => hubiese devuelto True en (I) y (II).
 
 Contradicci&oacute;n! Luego, el algoritmo devuelve en cada caso m&aacute;s de la mitad de las cl&aacute;usulas de la CNF.
+
+
