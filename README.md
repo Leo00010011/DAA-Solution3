@@ -70,3 +70,17 @@ Debido a la simplicidad de este primer algoritmo optamos por implementar otro al
 * 8: goto 2
 
 Como se puede notar la idea es hacer TRUE el literal que se encuentra en la mayor(cabe recalcar que hacer true un literal negativo es hacer FAlSE la variable que le corresponde) cantidad de clausulas repetidamente hasta la iteración en la que las clausulas no contengan variables para hacer TRUE (solo contengan negaciones de literales que ya se hicieron TRUE)
+
+A continuacion vamos a demostrar que para formas normales conjuntivas con clausulas con al menos k literales este algoritmo es (k + 1)/k-aprox. La demostracion se basa en varias propiedades del algoritmo:
+ * La cantidad de clausulas que se hacen true cuando se toma un literal es mayor o igual que la cantidad de clausulas que se quedan con el literal negado, pues el algoritmo siempre toma el literal que aparece en la mayor cantida de clausulas
+ * Si se toma un literal, la cantidad de clausulas que tienen el literal negado al final de la ejecucion del algoritmo es menor o igual a la cantidad de clausulas que hubo en el momento que se tomó el literal y por tanto es menor o igual a la cantidad de clausulas que hizo true el literal
+ * Como se hizo notar en la explicacion de del funcionamiento del algoritmo, cuando el algoritmo termina las clausulas que quedan en LEFT cumplen que estan constituidas por negaciones de literales que fueron tomados en las iteraciones anteriores
+ * Como se sabe que cada clausula tiene al menos k literales distintos al terminar el algoritmo hay k*|LEFT| literales distintos negados
+ * Como la cantidad de clausulas que se hicieron positivas en el momento que se tomo el literal es mayor que la cantidad de negaciones de ese literal en las clausulas en LEFT al final del algoritmo, y como se sabe que la negacion de cada literal que quedo en las clausulas de LEFT al final del algoritmo fue tomada en algun momento entonces SUB $\geq$ k*|LEFT|
+ * Luego sea $|S*|$ la cantidad de clausulas de la solución óptima y $|S|$ la cantidad de clausulas de la entrada del algoritmo entonces por definicion se tiene
+ $$ |S*| \leq |S|$$
+ $$|S*| \leq |LEFT| + |SUB|$$
+ $$|S*| \leq \frac{|SUB|}{k} + |SUB|$$
+ $$|S*| \leq \frac{k + 1}{k}|SUB|$$
+
+ Por lo que queda demostrado que para ese k es una (k + 1)/k-aprox
