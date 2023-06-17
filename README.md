@@ -56,4 +56,17 @@ Esto quiere decir que exite al menos una cl&aacute;usula que en ambas asignacion
 
 Contradicci&oacute;n! Luego, el algoritmo devuelve en cada caso m&aacute;s de la mitad de las cl&aacute;usulas de la CNF.
 
+### El otro k-aprox
 
+Debido a la simplicidad de este primer algoritmo optamos por implementar otro algoritmo que utiliza una idea greedy. La explicación de este algortimo va a utilizar la palabra "literal" para referirse a las ocurrencias de variables en las clausulas y cabe recalcar que si x es una variable entonces su ocurrencia en positivo constituye un literal y en negativo constituye otro distinto. Luego la idea del algortimo es la siguiente:
+
+* 1:Sea S el conjutno de clausulas
+* 2:Sea LIT el conjunto de todos los literales
+* 3:Sea SUB = $\empty$, TRUE = $\empty$, LEFT = $S$ y LEFT = LIT
+* 4:Si ningún literal en LIT está en alguna clausula de LEFT retornar SUB
+* 5:Sea $y$ el literal que se encuentra en la mayor cantidad de clausulas
+* 6:Sea $YT$ el conjunto de clausulas que contienen a $y$
+* 7:SUB = SUB $\cup$ $YT$ , LEFT = LEFT - $YT$, TRUE = TRUE $\cup$ {$y$}, LIT = LIT $\cup$ {$y$,$\overline{y}$}
+* 8: goto 2
+
+Como se puede notar la idea es hacer TRUE el literal que se encuentra en la mayor(cabe recalcar que hacer true un literal negativo es hacer FAlSE la variable que le corresponde) cantidad de clausulas repetidamente hasta la iteración en la que las clausulas no contengan variables para hacer TRUE (solo contengan negaciones de literales que ya se hicieron TRUE)
